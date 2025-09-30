@@ -67,7 +67,40 @@ It maps **laws/regulations → system design decisions** so you can confidently 
   - Fraud detection across claims using rules + ML graph analytics.  
 
 ---
+### 5. **DPDP (Digital Personal Data Protection Act, 2023 — India)**  
+- **Scope & Roles**: Applies to *digital personal data* (and digitized data) processed in India or by Indian Data Fiduciaries/Processors; creates the **Data Protection Board of India** (DPB). **Data Principal rights** include access, correction, erasure, grievance redressal, and nomination. :contentReference[oaicite:0]{index=0} :contentReference[oaicite:1]{index=1}  
+- **Core Obligations (high-impact)**:  
+  - **Consent & Withdrawal** with comparable ease; fiduciary remains responsible for processors. :contentReference[oaicite:2]{index=2}  
+  - **Security safeguards** and **breach intimation** to the **Board and each affected Data Principal**; retention only as needed → then **erase** (and cause processors to erase). :contentReference[oaicite:3]{index=3}  
+  - **Children (<18)**: **verifiable parental consent**; **no tracking/behavioural monitoring/targeted ads** to children; avoid detrimental processing. :contentReference[oaicite:4]{index=4}  
+  - **Significant Data Fiduciary (SDF)**: **DPO in India**, **independent data auditor**, **periodic DPIA & audits**. :contentReference[oaicite:5]{index=5}  
+  - **Cross-border transfers**: permitted **except to countries the government notifies as restricted**. :contentReference[oaicite:6]{index=6}  
+  - **Penalties**: DPB may levy monetary penalties **up to ₹250 crore** for specified contraventions. :contentReference[oaicite:7]{index=7}
 
+- **Architecture implications**:  
+  - **Consent/Purpose**: Consent registry; purpose tags in schemas/JWT; ABAC at a PDP (e.g., OPA) to enforce **purpose limitation**. :contentReference[oaicite:8]{index=8}  
+  - **Rights Ops**: DSAR/RTBF orchestration (discover → render → erase/tombstone), with lawful-retention carve-outs. :contentReference[oaicite:9]{index=9}  
+  - **Children’s Data**: Age-assurance + parent consent flows; **disable tracking/targeted ads** paths for child cohorts. :contentReference[oaicite:10]{index=10}  
+  - **Security & Breach**: Policy-as-code for safeguards; breach runbooks to notify DPB + users in prescribed manner. :contentReference[oaicite:11]{index=11}  
+  - **Cross-Border**: Egress DLP + country allow/deny lists mapped to Section 16 notifications. :contentReference[oaicite:12]{index=12}  
+  - **SDF Readiness**: Org chart for **DPO (India-based)**, contract an **independent data auditor**, schedule **DPIA** cadence. :contentReference[oaicite:13]{index=13}
+
+- **Checklist (DPDP)**  
+  - [ ] Consent UI/SDK + withdrawal parity implemented. :contentReference[oaicite:14]{index=14}  
+  - [ ] Purpose tags enforced at gateway/PDP; access decisions logged. :contentReference[oaicite:15]{index=15}  
+  - [ ] RTBF + correction flows with evidence; processor erasure cascades. :contentReference[oaicite:16]{index=16}  
+  - [ ] Child-data paths: age-gate, parental consent, **no tracking/ads**. :contentReference[oaicite:17]{index=17}  
+  - [ ] Breach notification pipeline to **DPB + affected users**. :contentReference[oaicite:18]{index=18}  
+  - [ ] Cross-border guardrails per govt. notifications. :contentReference[oaicite:19]{index=19}  
+  - [ ] If **SDF**: DPO (India), data auditor, DPIA, periodic audits. :contentReference[oaicite:20]{index=20}
+
+- **Interview Q&A (DPDP quick hits)**  
+  **Q:** *How do you enforce purpose limitation under DPDP?*  
+  **A:** Put purpose in consent + JWT; evaluate at a central PDP (OPA) on every call; log decisions and auto-revoke on consent withdrawal. :contentReference[oaicite:21]{index=21}  
+
+  **Q:** *What changes for children’s data?*  
+  **A:** Age-assurance + **verifiable parental consent**; block **tracking/behavioural monitoring/targeted ads**; add “detriment” checks in risk engine. :contentReference[oaicite:22]{index=22}
+---
 ## 🌍 Global Regulations  
 
 ### 1. **PCI-DSS (Payment Card Industry – Data Security Standard)**  
